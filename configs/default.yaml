@@ -1,0 +1,28 @@
+# ClinicalClaw default configuration placeholder.
+# Runtime code does not parse this file yet; it is here to document intended settings.
+
+project:
+  name: ClinicalClaw
+  disclaimer: "Research prototype only. Not medical advice."
+
+retrieval:
+  top_k: 3
+  bm25_weight: 0.65
+  dense_weight: 0.35
+  # TODO: real embedding model
+  # TODO: FAISS/Chroma integration
+  # TODO: reranker
+
+pipeline:
+  # TODO: LangGraph workflow
+  enable_claim_verification: true
+  enable_safety_guardrail: true
+
+evaluation:
+  # TODO: MedQA and MedMCQA evaluation
+  # TODO: claim-level faithfulness metrics
+  datasets: []
+
+safety:
+  # TODO: medical prompt injection tests
+  emergency_action: refuse

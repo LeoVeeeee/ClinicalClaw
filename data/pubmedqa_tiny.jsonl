@@ -1,0 +1,2 @@
+{"id": "pubmedqa-sample-1", "question": "Does aspirin reduce platelet aggregation?", "context": ["Aspirin irreversibly inhibits cyclooxygenase activity in platelets.", "This reduces thromboxane A2 formation and platelet aggregation."], "answer": "yes"}
+{"id": "pubmedqa-sample-2", "question": "Can antibiotics treat viral influenza?", "context": ["Influenza is caused by influenza viruses.", "Antibiotics target bacteria and are not effective against uncomplicated viral influenza."], "answer": "no"}
