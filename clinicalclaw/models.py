@@ -1,4 +1,4 @@
-"""Shared data structures for the ClinicalClaw scaffold."""
+"""Shared data structures for the ClinicalClaw research prototype."""
 
 from __future__ import annotations
 
@@ -47,13 +47,36 @@ class PubMedQAExample:
         ]
 
 
+Route = Literal["parametric_memory", "atomic", "associative", "reasoning"]
+ClinicalScenario = Literal[
+    "biomedical_research",
+    "symptom_consultation",
+    "medication_guidance",
+    "diagnostic_reasoning",
+    "rehabilitation",
+    "general",
+]
+QueryComplexity = Literal["low", "medium", "high"]
+
+
+@dataclass(frozen=True)
+class EnhancedQuery:
+    """Pre-retrieval query enhancement record."""
+
+    original_query: str
+    rewritten_query: str
+    expansion_terms: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
+
+
 @dataclass(frozen=True)
 class QueryPlan:
-    """A small query plan produced before retrieval."""
+    """A clinical query plan produced before retrieval."""
 
     original_question: str
     subqueries: list[str]
-    route: str = "medical_qa"
+    route: Route = "atomic"
+    scenario: ClinicalScenario = "general"
 
 
 @dataclass(frozen=True)
@@ -64,7 +87,7 @@ class RetrievalResult:
     score: float
     rank: int
     retriever: str
-    components: dict[str, float] = field(default_factory=dict)
+    components: dict[str, float | str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -100,6 +123,38 @@ class VerificationResult:
     score: float = 0.0
 
 
+CorrectionSeverity = Literal["low", "medium", "high"]
+CorrectionCategory = Literal[
+    "missing_citation",
+    "unsupported_claim",
+    "safety_risk",
+    "contradiction_risk",
+]
+
+
+@dataclass(frozen=True)
+class CorrectionFinding:
+    """A post-generation clinical output audit finding."""
+
+    finding_id: str
+    category: CorrectionCategory
+    severity: CorrectionSeverity
+    message: str
+    claim_id: str | None = None
+    evidence_doc_ids: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class CorrectionReport:
+    """Structured output audit and correction report."""
+
+    original_answer: str
+    corrected_answer: str
+    findings: list[CorrectionFinding] = field(default_factory=list)
+    requires_review: bool = False
+    notes: list[str] = field(default_factory=list)
+
+
 SafetyAction = Literal["allow", "caution", "refuse"]
 
 
@@ -124,4 +179,13 @@ class FinalAnswer:
     claims: list[Claim]
     verifications: list[VerificationResult]
     safety: SafetyDecision
+    correction_report: CorrectionReport | None = None
     disclaimer: str = SAFETY_DISCLAIMER
+
+
+@dataclass(frozen=True)
+class EvaluationSummary:
+    """Named metric outputs from a research evaluation run."""
+
+    metrics: dict[str, float]
+    notes: list[str] = field(default_factory=list)

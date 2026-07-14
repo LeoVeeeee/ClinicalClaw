@@ -1,4 +1,4 @@
-"""Safety policy stub for research-only medical QA."""
+"""Safety policy baseline for research-only medical QA."""
 
 from __future__ import annotations
 
@@ -59,8 +59,12 @@ class SafetyPolicy:
                 disclaimer=SAFETY_DISCLAIMER,
             )
 
-        if verifications and any(result.status != "supported" for result in verifications):
-            reasons.append("One or more claims are not fully supported by retrieved evidence.")
+        if verifications and any(
+            result.status != "supported" for result in verifications
+        ):
+            reasons.append(
+                "One or more claims are not fully supported by retrieved evidence."
+            )
             return SafetyDecision(
                 action="caution",
                 allowed=True,
@@ -73,6 +77,8 @@ class SafetyPolicy:
             action="allow",
             allowed=True,
             risk_level="low",
-            reasons=["Research-oriented question with no emergency or personalized advice trigger."],
+            reasons=[
+                "Research-oriented question with no emergency or personalized advice trigger."
+            ],
             disclaimer=SAFETY_DISCLAIMER,
         )

@@ -1,4 +1,4 @@
-"""Run the ClinicalClaw demo from the examples directory."""
+"""Run the ClinicalClaw baseline experiment from the examples directory."""
 
 from __future__ import annotations
 

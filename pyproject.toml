@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "clinicalclaw"
 version = "0.1.0"
-description = "ClinicalClaw: a beginner-friendly clinical agentic RAG scaffold with evidence verification."
+description = "ClinicalClaw: a clinical agentic RAG research prototype with evidence verification."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
@@ -14,6 +14,18 @@ authors = [
 dependencies = []
 
 [project.optional-dependencies]
+agentic = [
+  "langchain>=1.0,<2.0",
+  "langchain-core>=1.0,<2.0",
+  "langgraph>=1.0,<2.0"
+]
+eval = [
+  "langsmith>=0.1"
+]
+llm = [
+  "openai>=1.0",
+  "python-dotenv>=1.0"
+]
 dev = [
   "pytest>=7.0"
 ]

@@ -1,30 +1,36 @@
-# ClinicalClaw 4-Week Development Plan
+# ClinicalClaw Research Roadmap
 
-## Week 1: Naive Medical RAG
+## Track 1: Adaptive Retrieval
 
-- Build a tiny PubMedQA-style dataset loader and inspect normalized examples.
-- Implement BM25 retrieval and citation-based answer generation.
-- Add a minimal demo that prints evidence, citations, and the safety disclaimer.
-- Write baseline tests for loader behavior, retrieval ranking, and answer shape.
+- Maintain deterministic clinical-scenario classification and retrieval-route selection as the reproducible baseline; query complexity remains an internal route-decision signal.
+- TODO: compare rule fallback, optional LLM planning, and a trained MedBERT/lightweight classifier on the same annotated route/scenario cases.
+- TODO: implement FAISS/Chroma indexing and compare BM25, dense, hybrid, and adaptive retrieval.
+- TODO: add a reranker and measure effects on citation relevance.
 
-## Week 2: Agentic Retrieval
+## Track 2: Query Enhancement
 
-- Add query planning with multiple subqueries.
-- TODO: real embedding model for dense retrieval.
-- TODO: FAISS/Chroma integration for persistent vector search.
-- TODO: reranker to reorder hybrid retrieval candidates.
-- TODO: LangGraph workflow to replace the current linear scaffold.
+- Maintain terminology mapping for colloquial patient language, such as flu to influenza.
+- TODO: connect MeSH/UMLS terminology expansion.
+- TODO: add query rewriting for abbreviated or context-limited patient consultation queries.
+- TODO: evaluate query enhancement impact on recall, MRR, MAP, and latency.
 
-## Week 3: Evidence Verification
+## Track 3: Output Verification And Correction
 
-- Improve claim extraction with structured claim IDs and citation links.
-- TODO: real NLI verifier for supported, contradicted, and not-enough-evidence labels.
-- Add verification summaries to final answers.
-- TODO: medical prompt injection tests for unsafe or instruction-overriding prompts.
+- Maintain citation verification and deterministic output audit as the reproducible baseline.
+- TODO: replace lexical verification with an NLI verifier.
+- TODO: add clinical error detection, localization, and correction inspired by MEDEC/MEDIQA-CORR.
+- TODO: add multi-model or multi-sample voting for correction candidates.
+- TODO: add medical prompt injection and unsafe-advice tests.
 
-## Week 4: Evaluation and Research Report
+## Track 4: Clinical Evaluation
 
-- TODO: MedQA and MedMCQA evaluation adapters.
-- TODO: claim-level faithfulness metrics.
-- Compare naive RAG, hybrid RAG, reranked RAG, and verified RAG.
-- Write findings, limitations, and future work in `reports/clinicalclaw_report.md`.
+- Maintain precision@k, recall@k, F1@k, MRR, MAP, claim support rate, unsafe-output flag rate, and latency metrics.
+- TODO: add PubMedQA, MedQA, MedMCQA, and MMLU-Med adapters.
+- TODO: add clinician review rubrics for relevance, safety, clarity, and workflow fit.
+- TODO: add optional LangSmith experiment tracking for RAG and verifier runs.
+
+## Track 5: Pilot Readiness
+
+- Keep all outputs clearly marked as research-prototype output, not clinical advice.
+- TODO: define de-identification, ethics/IRB, logging, and clinician-review requirements before any real-world pilot.
+- TODO: update `reports/clinicalclaw_report.md` after each reproducible experiment batch with findings, limitations, and next steps.

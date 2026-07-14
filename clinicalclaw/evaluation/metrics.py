@@ -5,7 +5,9 @@ from __future__ import annotations
 from clinicalclaw.models import Claim, RetrievalResult, VerificationResult
 
 
-def retrieval_recall_at_k(results: list[RetrievalResult], relevant_doc_ids: set[str], k: int) -> float:
+def retrieval_recall_at_k(
+    results: list[RetrievalResult], relevant_doc_ids: set[str], k: int
+) -> float:
     """Compute recall@k for retrieved documents."""
 
     if not relevant_doc_ids:
@@ -23,8 +25,8 @@ def citation_coverage(claims: list[Claim]) -> float:
     return cited / len(claims)
 
 
-def claim_faithfulness_placeholder(verifications: list[VerificationResult]) -> float:
-    """Return supported-claim fraction as a placeholder faithfulness score.
+def claim_faithfulness_baseline(verifications: list[VerificationResult]) -> float:
+    """Return supported-claim fraction as a baseline faithfulness score.
 
     TODO: claim-level faithfulness metrics
     """
@@ -35,8 +37,8 @@ def claim_faithfulness_placeholder(verifications: list[VerificationResult]) -> f
     return supported / len(verifications)
 
 
-def medqa_medmcqa_placeholder() -> None:
-    """Placeholder for future clinical QA benchmark integrations.
+def medqa_medmcqa_extension_point() -> None:
+    """Extension point for clinical QA benchmark integrations.
 
     TODO: MedQA and MedMCQA evaluation
     """

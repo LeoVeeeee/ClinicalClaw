@@ -1,5 +1,5 @@
 """LLM provider abstractions."""
 
-from clinicalclaw.llm.mock_provider import MockLLMProvider
+from clinicalclaw.llm.deterministic_provider import DeterministicLLMProvider
 
-__all__ = ["MockLLMProvider"]
+__all__ = ["DeterministicLLMProvider"]

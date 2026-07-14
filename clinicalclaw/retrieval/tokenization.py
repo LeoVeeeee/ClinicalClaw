@@ -1,4 +1,4 @@
-"""Small text normalization helpers for toy retrieval."""
+"""Small text normalization helpers for baseline retrieval."""
 
 from __future__ import annotations
 

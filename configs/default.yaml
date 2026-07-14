@@ -1,4 +1,4 @@
-# ClinicalClaw default configuration placeholder.
+# ClinicalClaw default research configuration.
 # Runtime code does not parse this file yet; it is here to document intended settings.
 
 project:
@@ -9,17 +9,55 @@ retrieval:
   top_k: 3
   bm25_weight: 0.65
   dense_weight: 0.35
+  adaptive_types:
+    - parametric_memory
+    - atomic
+    - associative
+    - reasoning
   # TODO: real embedding model
   # TODO: FAISS/Chroma integration
   # TODO: reranker
 
+query_enhancement:
+  terminology_source: built_in_baseline
+  # TODO: connect MeSH/UMLS terminology expansion.
+
+query_planning:
+  rules_path: configs/routing_rules.json
+  prompts_path: configs/routing_prompts.json
+  enable_llm: auto
+  llm_provider: openai_compatible
+  model_env: DEEPSEEK_MODEL
+  api_key_env: DEEPSEEK_API_KEY
+  api_url_env: DEEPSEEK_API_URL
+  # Install with: pip install -e ".[llm]"
+  # LLM planning falls back to deterministic rules when unavailable or invalid.
+
 pipeline:
-  # TODO: LangGraph workflow
+  mode: baseline
   enable_claim_verification: true
+  enable_output_audit: true
   enable_safety_guardrail: true
 
+agentic:
+  enabled: false
+  framework: langgraph
+  # Install with: pip install -e ".[agentic]"
+  # TODO: connect real LangChain chat models for agent reasoning.
+
 evaluation:
+  langsmith: optional
+  metrics:
+    - precision_at_k
+    - recall_at_k
+    - f1_at_k
+    - mrr
+    - map
+    - claim_support_rate
+    - unsafe_output_flag_rate
+    - latency_ms
   # TODO: MedQA and MedMCQA evaluation
+  # TODO: MMLU-Med evaluation
   # TODO: claim-level faithfulness metrics
   datasets: []
 

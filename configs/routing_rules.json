@@ -1,0 +1,113 @@
+{
+  "parametric_memory_markers": [
+    "hello",
+    "thanks",
+    "who are you"
+  ],
+  "complexity": {
+    "medium_markers": [
+      "compare",
+      "interaction",
+      "relationship",
+      "associated",
+      "link",
+      "between"
+    ],
+    "high_markers": [
+      "why",
+      "how",
+      "explain",
+      "reason",
+      "cause",
+      "mechanism"
+    ]
+  },
+  "scenario_order": [
+    "medication_guidance",
+    "symptom_consultation",
+    "diagnostic_reasoning",
+    "rehabilitation",
+    "biomedical_research"
+  ],
+  "scenario_markers": {
+    "medication_guidance": [
+      "antibiotic",
+      "antibiotics",
+      "dosage",
+      "dose",
+      "drug",
+      "medication",
+      "prescribe",
+      "take"
+    ],
+    "symptom_consultation": [
+      "cough",
+      "dizzy",
+      "fever",
+      "pain",
+      "rash",
+      "symptom"
+    ],
+    "diagnostic_reasoning": [
+      "condition",
+      "diagnose",
+      "disease",
+      "what disease"
+    ],
+    "rehabilitation": [
+      "exercise",
+      "rehab",
+      "rehabilitation",
+      "recovery"
+    ],
+    "biomedical_research": [
+      "autophagic",
+      "birth weight",
+      "breast cancer",
+      "cancer",
+      "case-control",
+      "cell",
+      "cells",
+      "chemoradiation",
+      "chemotherapy",
+      "clinical trial",
+      "cohort",
+      "eicosanoid",
+      "eosinophilia",
+      "evidence",
+      "extracted",
+      "fgfr",
+      "fibrinolytic",
+      "gene",
+      "goblet",
+      "human",
+      "humans",
+      "hyperglycemia",
+      "ilc",
+      "influenza",
+      "lymphoid",
+      "mcf",
+      "methylation",
+      "mice",
+      "molar",
+      "molars",
+      "mucin",
+      "neoadjuvant",
+      "obesity",
+      "platelet",
+      "phospholipase",
+      "pubmed",
+      "receptor",
+      "reperfusion",
+      "retrospective",
+      "sirtuin",
+      "stem cells",
+      "stemi",
+      "study",
+      "therapy",
+      "trial",
+      "tumor",
+      "xenograft"
+    ]
+  }
+}

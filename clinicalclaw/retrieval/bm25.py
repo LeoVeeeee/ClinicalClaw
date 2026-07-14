@@ -10,9 +10,11 @@ from clinicalclaw.retrieval.tokenization import tokenize
 
 
 class BM25Retriever:
-    """A tiny BM25 implementation for learning and tests."""
+    """A compact BM25 implementation for baseline retrieval experiments."""
 
-    def __init__(self, documents: list[Document], k1: float = 1.5, b: float = 0.75) -> None:
+    def __init__(
+        self, documents: list[Document], k1: float = 1.5, b: float = 0.75
+    ) -> None:
         self.documents = documents
         self.k1 = k1
         self.b = b
@@ -20,7 +22,9 @@ class BM25Retriever:
         self._term_frequencies = [Counter(tokens) for tokens in self._tokenized]
         self._doc_lengths = [len(tokens) for tokens in self._tokenized]
         self._average_doc_length = (
-            sum(self._doc_lengths) / len(self._doc_lengths) if self._doc_lengths else 0.0
+            sum(self._doc_lengths) / len(self._doc_lengths)
+            if self._doc_lengths
+            else 0.0
         )
         self._document_frequency = self._build_document_frequency()
 
@@ -75,7 +79,9 @@ class BM25Retriever:
     def _idf(self, term: str) -> float:
         document_count = len(self.documents)
         matching_count = self._document_frequency.get(term, 0)
-        return math.log(1 + (document_count - matching_count + 0.5) / (matching_count + 0.5))
+        return math.log(
+            1 + (document_count - matching_count + 0.5) / (matching_count + 0.5)
+        )
 
     def _term_weight(self, frequency: int, doc_length: int) -> float:
         if self._average_doc_length == 0:

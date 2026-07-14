@@ -1,30 +1,50 @@
-"""Command-line baseline experiment runner for ClinicalClaw."""
+"""Run the optional LangGraph ClinicalClaw experiment."""
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from clinicalclaw.agentic import ClinicalClawGraphPipeline
 from clinicalclaw.data import DEFAULT_LOCAL_PUBMEDQA_PATH, load_research_pubmedqa
 from clinicalclaw.models import SAFETY_DISCLAIMER
-from clinicalclaw.pipeline import ClinicalClawPipeline
 
 
-def build_demo_pipeline() -> ClinicalClawPipeline:
-    """Create a pipeline backed by a bounded local PubMedQA subset when present."""
-
+def build_agentic_demo_pipeline() -> ClinicalClawGraphPipeline:
     examples = load_research_pubmedqa(limit=100)
     documents = [
         document for example in examples for document in example.to_documents()
     ]
-    return ClinicalClawPipeline(documents=documents, top_k=3)
+    return ClinicalClawGraphPipeline(documents=documents, top_k=3)
 
 
 def main() -> None:
-    """Run a minimal end-to-end baseline experiment."""
+    question = (
+        " ".join(sys.argv[1:]).strip() or "Does aspirin reduce platelet aggregation?"
+    )
+    try:
+        pipeline = build_agentic_demo_pipeline()
+    except ImportError as exc:
+        print("ClinicalClaw Agentic Experiment")
+        print("===============================")
+        print(SAFETY_DISCLAIMER)
+        dataset_label = (
+            "local PubMedQA subset"
+            if DEFAULT_LOCAL_PUBMEDQA_PATH.exists()
+            else "built-in PubMedQA-style sample"
+        )
+        print(f"Dataset: {dataset_label} (up to 100 examples)")
+        print()
+        print(str(exc))
+        return
 
-    question = "Does aspirin reduce platelet aggregation?"
-    pipeline = build_demo_pipeline()
     final = pipeline.run(question)
-
-    print("ClinicalClaw Baseline Experiment")
+    print("ClinicalClaw Agentic Experiment")
     print("===============================")
     print(SAFETY_DISCLAIMER)
     dataset_label = (

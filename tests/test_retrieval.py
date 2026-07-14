@@ -6,8 +6,13 @@ from clinicalclaw.retrieval import BM25Retriever, HybridRetriever
 
 def test_bm25_ranks_matching_clinical_text_first() -> None:
     documents = [
-        Document(doc_id="heart", text="Aspirin reduces platelet aggregation in cardiovascular disease."),
-        Document(doc_id="space", text="The telescope observed distant galaxies and stars."),
+        Document(
+            doc_id="heart",
+            text="Aspirin reduces platelet aggregation in cardiovascular disease.",
+        ),
+        Document(
+            doc_id="space", text="The telescope observed distant galaxies and stars."
+        ),
     ]
     retriever = BM25Retriever(documents)
 
@@ -24,9 +29,15 @@ def test_hybrid_score_combination_respects_weights() -> None:
     ]
     query = "aspirin platelet"
 
-    sparse_only = HybridRetriever(documents, bm25_weight=1.0, dense_weight=0.0).search(query, top_k=2)
-    dense_only = HybridRetriever(documents, bm25_weight=0.0, dense_weight=1.0).search(query, top_k=2)
-    blended = HybridRetriever(documents, bm25_weight=0.25, dense_weight=0.75).search(query, top_k=2)
+    sparse_only = HybridRetriever(documents, bm25_weight=1.0, dense_weight=0.0).search(
+        query, top_k=2
+    )
+    dense_only = HybridRetriever(documents, bm25_weight=0.0, dense_weight=1.0).search(
+        query, top_k=2
+    )
+    blended = HybridRetriever(documents, bm25_weight=0.25, dense_weight=0.75).search(
+        query, top_k=2
+    )
 
     sparse_doc = sparse_only[0]
     dense_doc = dense_only[0]

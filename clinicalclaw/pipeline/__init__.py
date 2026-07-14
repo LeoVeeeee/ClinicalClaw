@@ -1,4 +1,4 @@
-"""Pipeline orchestration for the ClinicalClaw scaffold."""
+"""Pipeline orchestration for the ClinicalClaw research prototype."""
 
 from clinicalclaw.pipeline.workflow import ClinicalClawPipeline
 

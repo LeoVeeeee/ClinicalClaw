@@ -1,4 +1,4 @@
-"""Claim-level evidence verifier stub."""
+"""Claim-level evidence verifier baseline."""
 
 from __future__ import annotations
 
@@ -12,13 +12,17 @@ class EvidenceVerifier:
     TODO: real NLI verifier
     """
 
-    def verify(self, claims: list[Claim], evidence: list[Document]) -> list[VerificationResult]:
+    def verify(
+        self, claims: list[Claim], evidence: list[Document]
+    ) -> list[VerificationResult]:
         """Return one verification result per claim."""
 
         evidence_by_id = {document.doc_id: document for document in evidence}
         return [self._verify_one(claim, evidence_by_id) for claim in claims]
 
-    def _verify_one(self, claim: Claim, evidence_by_id: dict[str, Document]) -> VerificationResult:
+    def _verify_one(
+        self, claim: Claim, evidence_by_id: dict[str, Document]
+    ) -> VerificationResult:
         if not claim.cited_doc_ids:
             return VerificationResult(
                 claim_id=claim.claim_id,
@@ -29,7 +33,9 @@ class EvidenceVerifier:
             )
 
         cited_documents = [
-            evidence_by_id[doc_id] for doc_id in claim.cited_doc_ids if doc_id in evidence_by_id
+            evidence_by_id[doc_id]
+            for doc_id in claim.cited_doc_ids
+            if doc_id in evidence_by_id
         ]
         if not cited_documents:
             return VerificationResult(
@@ -41,7 +47,9 @@ class EvidenceVerifier:
             )
 
         claim_terms = set(tokenize(claim.text))
-        evidence_terms = set(tokenize(" ".join(document.text for document in cited_documents)))
+        evidence_terms = set(
+            tokenize(" ".join(document.text for document in cited_documents))
+        )
         overlap = len(claim_terms & evidence_terms)
         score = overlap / len(claim_terms) if claim_terms else 0.0
         status = "supported" if score >= 0.2 else "not_enough_evidence"

@@ -1,4 +1,4 @@
-"""Claim extraction stub."""
+"""Claim extraction baseline."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""ClinicalClaw: clinical agentic RAG scaffold with evidence verification."""
+"""ClinicalClaw: clinical agentic RAG research prototype with evidence verification."""
 
 from clinicalclaw.models import SAFETY_DISCLAIMER
 
